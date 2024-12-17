@@ -4,43 +4,50 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 
 function Footer() {
-  const [darkMode, setDarkMode] = useContext(DarkModeContext);
+  const [darkMode] = useContext(DarkModeContext);
+
   return (
-    <div
-      className="flex h-14 w-full justify-between items-center bottom-0"
-      // style={darkMode ? { background: "#ffffff" } : { background: "#020617" }}
+    <footer
+      className={`flex flex-col md:flex-row h-auto md:h-14 w-full justify-between items-center px-4 py-2 md:py-0 ${
+        darkMode ? "bg-white text-black" : "bg-[#020617] text-white"
+      }`}
     >
-      <div
-        className="w-1/2 items-center justify-center px-2 text-xs"
-        style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
-      >
-        Copyright © Bilel Rahmouni {new Date().getFullYear()}. All rights
-        reserved.
+      <div className="text-center text-xs md:text-sm mb-2 md:mb-0">
+        © {new Date().getFullYear()} Bilel Rahmouni. All rights reserved.
       </div>
-      <div className="h-full w-[10rem] flex-row flex justify-around items-center ">
+
+      <div className="flex space-x-4">
         <a
-          className="flex items-center"
           href="https://www.linkedin.com/in/bilel-rahmouni001/"
           target="_blank"
+          rel="noreferrer"
+          className="hover:scale-110 duration-300"
         >
-          <FaLinkedin size={20} color="dodgerblue" />
+          <FaLinkedin size={24} className="text-blue-600" />
         </a>
         <a
-          className="flex items-center"
           href="https://github.com/Bilel-Rahmouni"
           target="_blank"
+          rel="noreferrer"
+          className="hover:scale-110 duration-300"
         >
-          <FaGithub size={20} color="dodgerblue" />
+          <FaGithub
+            size={24}
+            // style={{ color: darkMode ? "white" : "#020617" }}
+            className={{ color: darkMode ? "text-white" : "text-[#020617]" }}
+          />
         </a>
+
         <a
-          className="flex items-center"
           href="mailto:bilelrahmouni914@gmail.com"
           target="_blank"
+          rel="noreferrer"
+          className="hover:scale-110 duration-300"
         >
-          <HiOutlineMail size={20} color="dodgerblue" />
+          <HiOutlineMail size={24} className="text-red-500" />
         </a>
       </div>
-    </div>
+    </footer>
   );
 }
 

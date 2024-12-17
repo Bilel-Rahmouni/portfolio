@@ -4,16 +4,25 @@ import { Link } from "react-scroll";
 import { CiLight } from "react-icons/ci";
 import { CiDark } from "react-icons/ci";
 import { DarkModeContext } from "../context";
-import me from "../assets/me.png";
+// import me from "../assets/me.png";
+import me from "../assets/BilelRahmouniLogo.png";
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
   const [darkMode, setDarkMode] = useContext(DarkModeContext);
   return (
     <div
-      className="fixed px-10 h-14 w-full flex justify-between items-center "
-      // style={darkMode ? { background: "#ffffff" } : { background: "#020617" }}
+      className="fixed px-10 z-50 h-14 w-full  flex justify-between items-center "
+      style={darkMode ? { background: "#ffffff" } : { background: "#020617" }}
     >
+      <Link
+        to="home"
+        smooth={true}
+        duration={500}
+        style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
+      >
+        <img src={me} className="h-14 w-auto" />
+      </Link>
       {/* menu */}
       <ul className="hidden md:flex absolute right-0">
         <li>
@@ -84,7 +93,7 @@ const Navbar = () => {
       </ul>
 
       {/* dark mode button mobile */}
-      <div className="md:hidden z-10 absolute flex left-5">
+      <div className="md:hidden z-10 absolute flex right-14">
         {darkMode ? (
           <CiLight
             color="#000000"

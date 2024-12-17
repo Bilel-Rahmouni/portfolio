@@ -8,111 +8,64 @@ import Node from "../assets/node.png";
 import FireBase from "../assets/firebase.png";
 import Tailwind from "../assets/tailwind.png";
 import Mongo from "../assets/mongo.png";
+import Aws from "../assets/aws.png";
 import { DarkModeContext } from "../context";
 
 const Skills = () => {
-  const [darkMode, setDarkMode] = useContext(DarkModeContext);
+  const [darkMode] = useContext(DarkModeContext);
+
+  const skills = [
+    { id: 1, src: HTML, title: "HTML" },
+    { id: 2, src: CSS, title: "CSS" },
+    { id: 3, src: JavaScript, title: "JAVASCRIPT" },
+    { id: 4, src: ReactImg, title: "REACT" },
+    { id: 5, src: ReactNativeImg, title: "REACT NATIVE" },
+    { id: 6, src: Node, title: "NODE JS" },
+    { id: 7, src: Mongo, title: "MONGO DB" },
+    { id: 7, src: Aws, title: "Aws" },
+    { id: 8, src: FireBase, title: "FIREBASE" },
+    { id: 9, src: Tailwind, title: "TAILWIND" },
+  ];
 
   return (
     <div
       name="skills"
-      className="w-full h-screen pt-14 flex flex-col justify-start"
-      style={darkMode ? { background: "#ffffff" } : { background: "#020617" }}
+      className={`w-full h-screen mb-8 pt-14 flex flex-col justify-center px-6 md:px-12 ${
+        darkMode ? "bg-white" : "bg-[#020617]"
+      }`}
     >
-      <div className="mb-10">
+      {/* Section Title */}
+      <div className="mb-8">
         <p
-          className="text-4xl font-bold inline border-b-4 border-pink-600"
-          style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
+          className={`text-4xl font-bold inline border-b-4 border-pink-600 ${
+            darkMode ? "text-black" : "text-white"
+          }`}
         >
           Skills
         </p>
       </div>
-      <div className="bg-gray h-2/3 flex flex-wrap text-center justify-center items-center">
-        <div className="hover:scale-110 duration-500 mx-4">
-          <img className="w-16 mx-auto" src={HTML} alt="HTML icon" />
-          <p
-            className="my-4"
-            style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
+
+      {/* Skills Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 px-6 md:px-12 lg:px-20 text-center">
+        {skills.map(({ id, src, title }) => (
+          <div
+            key={id}
+            className="flex flex-col items-center justify-center transform hover:scale-110 transition-transform duration-300"
           >
-            HTML
-          </p>
-        </div>
-        <div className="hover:scale-110 duration-500 mx-4">
-          <img className="w-16 mx-auto" src={CSS} alt="HTML icon" />
-          <p
-            className="my-4"
-            style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
-          >
-            CSS
-          </p>
-        </div>
-        <div className="hover:scale-110 duration-500 mx-4">
-          <img
-            className="w-16 mx-auto"
-            src={JavaScript}
-            alt="JAVASCRIPT icon"
-          />
-          <p
-            className="my-4"
-            style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
-          >
-            JAVASCRIPT
-          </p>
-        </div>
-        <div className="hover:scale-110 duration-500 mx-4">
-          <img className="w-16 mx-auto" src={ReactImg} alt="HTML icon" />
-          <p
-            className="my-4"
-            style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
-          >
-            REACT
-          </p>
-        </div>
-        <div className="hover:scale-110 duration-500 mx-4">
-          <img className="w-16 mx-auto" src={ReactNativeImg} alt="HTML icon" />
-          <p
-            className="my-4"
-            style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
-          >
-            REACT NATIVE
-          </p>
-        </div>
-        <div className="hover:scale-110 duration-500 mx-4">
-          <img className="w-16 mx-auto" src={Node} alt="HTML icon" />
-          <p
-            className="my-4"
-            style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
-          >
-            NODE JS
-          </p>
-        </div>
-        <div className="hover:scale-110 duration-500 mx-4">
-          <img className="w-16 mx-auto" src={Mongo} alt="HTML icon" />
-          <p
-            className="my-4"
-            style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
-          >
-            MONGO DB
-          </p>
-        </div>
-        <div className="hover:scale-110 duration-500 mx-4">
-          <img className="w-16 mx-auto" src={FireBase} alt="HTML icon" />
-          <p
-            className="my-4"
-            style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
-          >
-            FIREBASE
-          </p>
-        </div>
-        <div className="hover:scale-110 duration-500 mx-4">
-          <img className="w-16 mx-auto" src={Tailwind} alt="HTML icon" />
-          <p
-            className="my-4"
-            style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
-          >
-            TAILWIND
-          </p>
-        </div>
+            <img
+              src={src}
+              alt={`${title} icon`}
+              className="w-20 h-24 md:w-24  p-5 mb-4 shadow-md rounded-lg "
+            />
+            <p
+              className={`text-lg font-semibold ${
+                darkMode ? "text-gray-800" : "text-gray-300"
+              }`}
+            >
+              {title}
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   );

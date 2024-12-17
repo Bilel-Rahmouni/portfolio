@@ -6,95 +6,98 @@ import { MdOutlineArticle } from "react-icons/md";
 import { BsArrowRightCircle } from "react-icons/bs";
 
 const Work = () => {
-  // projects file
-  const project = data;
-  //setProject(data);
-  const [darkMode, setDarkMode] = useContext(DarkModeContext);
+  const projects = data; // Project data
+  const [darkMode] = useContext(DarkModeContext);
+
   return (
     <div
       name="work"
-      className="w-full md:h-screen h-full pt-14"
-      style={darkMode ? { background: "#ffffff" } : { background: "#020617" }}
+      className={`w-full mb-8 pt-14 flex flex-col justify-center px-6 md:px-12 ${
+        darkMode ? "bg-white" : "bg-[#020617]"
+      }`}
     >
-      <div className="mb-5">
+      {/* Section Title */}
+      <div className="mb-8">
         <p
-          className="text-4xl font-bold inline border-b-4 border-pink-600"
-          style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
+          className={`text-4xl font-bold inline border-b-4 mb-8 border-pink-600 ${
+            darkMode ? "text-black" : "text-white"
+          }`}
         >
           Work
         </p>
+        <p
+          className={`text-lg md:text-xl ${
+            darkMode ? "text-gray-700" : "text-gray-300"
+          } mt-4`}
+        >
+          This is an example of projects I have worked on, showcasing my skills
+          and experience 📈.
+        </p>
       </div>
-      {/* Gird Item */}
-      <div className="flex flex-col md:flex-row mb-2 items-center justify-center ">
-        {project.map((item, index) => (
-          <div className="size-[20rem]  mb-10 flex flex-col items-center justify-center">
+
+      {/* Project Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 px-6 md:px-12 lg:px-20">
+        {projects.map((item, index) => (
+          <div
+            key={index}
+            className="group relative rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+          >
+            {/* Project Image */}
             <div
-              key={index}
-              style={{
-                backgroundImage: `url(${item.image})`,
-                backgroundPosition: "center",
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-                borderWidth: 1,
-                borderColor: darkMode
-                  ? "1px 1px 1px 1px rgba(0, 0, 0, 0.5)"
-                  : "1px 1px 1px 1px rgba(255, 255, 255, 0.5)",
-                // boxShadow: darkMode
-                //   ? "1px 1px 1px 2px rgba(0, 0, 0, 0.5)"
-                //   : "1px 1px 1px 2px rgba(255, 255, 255, 0.5)",
-              }}
-              className="my-2 size-[16rem] group container 
-                   flex justify-center text-center items-center
-                   hover:border-2 hover:border-pink-600 "
-            >
-              {/* Hover effect for images */}
-              <div className="opacity-0 group-hover:opacity-100 ">
-                <div className="text-center flex flex-col justify-center items-center">
-                  {/* eslint-disable-next-line */}
-                  {item.article && (
-                    <Link to={item.article}>
-                      <button
-                        className="text-center justify-center bg-sky-500 flex  
-                           font-bold text-lg p-2 m-2 rounded-sm"
-                      >
-                        <MdOutlineArticle className="mx-2" size={24} />
-                        Article
-                      </button>
-                    </Link>
-                  )}
-                  <a href={item.live} target="_blank" rel="noreferrer">
-                    <button
-                      className="text-center justify-center bg-sky-500 flex  
-                           font-bold text-lg p-2 rounded-sm"
-                    >
-                      <BsArrowRightCircle className="mx-2" size={24} />
-                      Live
+              className="h-48 bg-cover bg-center"
+              style={{ backgroundImage: `url(${item.image})` }}
+            ></div>
+
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-70 transition-opacity duration-300 flex justify-center items-center">
+              <div className="flex flex-col space-y-3 items-center">
+                {/* Article Button */}
+                {item.article && (
+                  <Link to={item.article}>
+                    <button className="flex items-center bg-sky-500 text-white font-semibold px-4 py-2 rounded-sm hover:bg-sky-600">
+                      <MdOutlineArticle size={24} className="mr-2" />
+                      Article
                     </button>
-                  </a>
-                </div>
+                  </Link>
+                )}
+                {/* Live Button */}
+                <a href={item.live} target="_blank" rel="noreferrer">
+                  <button className="flex items-center bg-sky-500 text-white font-semibold px-4 py-2 rounded-sm hover:bg-sky-600">
+                    <BsArrowRightCircle size={24} className="mr-2" />
+                    Live
+                  </button>
+                </a>
               </div>
             </div>
+
+            {/* Project Title */}
             <p
-              className="text-md md:text-2xl self-center font-bold tracking-wider my-2 "
-              style={darkMode ? { color: "#000000" } : { color: "#ffffff" }}
+              className={`text-lg font-bold tracking-wide text-center mt-4 ${
+                darkMode ? "text-gray-800" : "text-gray-200"
+              }`}
             >
               {item.name}
             </p>
 
-            <div className="flex flex-row justify-start items-end ">
-              {item.technologies.map((tech) => (
-                <div className="hover:scale-110 duration-500 mx-2 flex flex-col">
-                  <img className="w-5 mx-auto" src={tech.img} alt="HTML icon" />
-                  <div className="">
-                    <p
-                      className="my-1 h-1 text-sm self-center"
-                      style={
-                        darkMode ? { color: "#000000" } : { color: "#ffffff" }
-                      }
-                    >
-                      {tech.title}
-                    </p>
-                  </div>
+            {/* Technologies */}
+            <div className="flex justify-center space-x-4 mt-3 mb-4">
+              {item.technologies.map((tech, techIndex) => (
+                <div
+                  key={techIndex}
+                  className="flex flex-col items-center hover:scale-110 duration-300"
+                >
+                  <img
+                    src={tech.img}
+                    alt={tech.title}
+                    className="w-6 h-6 md:w-8 md:h-8"
+                  />
+                  <p
+                    className={`text-xs mt-1 ${
+                      darkMode ? "text-gray-800" : "text-gray-300"
+                    }`}
+                  >
+                    {tech.title}
+                  </p>
                 </div>
               ))}
             </div>
